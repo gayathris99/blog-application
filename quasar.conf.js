@@ -10,6 +10,8 @@ const { configure } = require('quasar/wrappers');
 
 module.exports = configure(function (ctx) {
   return {
+
+    
     // https://quasar.dev/quasar-cli/supporting-ts
     supportTS: false,
 
@@ -46,6 +48,7 @@ module.exports = configure(function (ctx) {
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
       vueRouterMode: 'hash', // available values: 'hash', 'history'
+      // env:env,
 
       // transpile: false,
       // publicPath: '/',

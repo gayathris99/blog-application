@@ -1,17 +1,39 @@
 <template>
-  <q-page class="flex flex-center">
-    <img
-      alt="Quasar logo"
-      src="~assets/quasar-logo-vertical.svg"
-      style="width: 200px; height: 200px"
-    >
-  </q-page>
+  <q-layout>
+    <div class="home">
+      <BlogPost :post ="welcomeScreen"/>
+      <BlogPost :post="post" v-for="(post, index) in sampleBlogPosts" :key="index"/>
+    </div>
+  </q-layout>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import BlogPost from 'src/components/BlogPost.vue'
+export default {
+  components: { BlogPost },
+  data () {
+    return {
+      welcomeScreen: {
+        title: "Welcome to BusyMonk",
+        blogPost: "Find your favourite travel blogs here!!",
+        welcomeScreen: true,
+        photos: "coding"
 
-export default defineComponent({
-  name: 'PageIndex'
-})
+      },
+      sampleBlogPosts: [
+        {
+          title: "Blog No 1",
+          blogContent: "This is an example!",
+          blogCoverPhoto: "beautiful-stories"
+        },
+        {
+          title: "Blog No 2",
+          blogContent: "This is another example!",
+          blogCoverPhoto: "designed-for-everyone"
+        },
+      ]
+        
+    }
+  }
+}
 </script>
