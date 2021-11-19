@@ -4,7 +4,17 @@ const routes = [
     path: '/',
     component: () => import('src/layouts/MainLayout.vue'),
     children: [
-      { path: '/', component: () => import('src/pages/Index.vue') }
+      { path: '/', component: () => import('src/pages/Index.vue'), meta: {
+        title: 'BusyMonk'
+      } },
+      {
+        path: "/blogs",
+        component: () => import('src/pages/Blogs.vue'),
+        meta: {
+          title: 'BusyMonk | Blogs'
+        }
+        
+      }
     ]
   },
 

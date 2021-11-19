@@ -1,0 +1,1 @@
+export const blogCards = state => state.sampleBlogCards

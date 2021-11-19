@@ -1,5 +1,5 @@
 <template>
-<q-layout>
+
 <header>
   <nav class="container">
         <div class="branding">
@@ -7,27 +7,38 @@
            <div class="nav-links">
              <ul v-if="!mobile">
                 <router-link class="link" to="/">Home</router-link>
-                <router-link class="link" to="/">Blogs</router-link>
+                <router-link class="link" to="/blogs" :style="$route.path.includes('blogs') ? 'color:#1eb8b8' : ''">Blogs</router-link>
                 <router-link class="link" to="/">Create Post</router-link>
                 <router-link class="link" to="/">Login/Register</router-link>
              </ul>
              
            </div>
-           <q-icon name="menu" class="menu-icon" style="font-size: 2em;" v-show="mobile" @click="toggleMobileNav"/>
+           <q-icon name="menu" class="menu-icon" style="font-size: 2em;" v-if="mobile" @click="toggleMobileNav"/>
         </div>
     </nav>
     
-    <transition name="mobile-nav"> 
-              <ul v-show="mobileNav" class="mobile-nav">
+    <transition name="mobile-nav" @click="toggleMobileNav"> 
+              <ul v-if="mobileNav" class="mobile-nav">
                 <router-link class="link" to="/">Home</router-link>
-                <router-link class="link" to="/">Blogs</router-link>
+                <router-link class="link" to="/blogs" :style="$route.path.includes('blogs') ? 'color:#1eb8b8' : ''">Blogs</router-link>
                 <router-link class="link" to="/">Create Post</router-link>
                 <router-link class="link" to="/">Login/Register</router-link>
              </ul>
     </transition>
   </header>
   <router-view></router-view>
-  </q-layout>
+  <footer>
+    <div class="footer-container">
+       <h4>BusyMonk</h4>
+     <ul>
+      <router-link class="link" to="/">Home</router-link>
+      <router-link class="link" to="/blogs" :style="$route.path.includes('blogs') ? 'color:#1eb8b8' : ''">Blogs</router-link>
+      <router-link class="link" to="/">Login/Register</router-link>
+    </ul>
+    </div>
+
+  </footer>
+
 </template>
 <script>
 export default {
@@ -141,6 +152,27 @@ header {
   }
 
 
+  .footer-container {
+ 
+  display:flex;
+  color:white;
+  background-color: #303030;
 
+  ul {
+    display: flex;
+    flex-direction: column;
+    padding: 50px 25px
+  }
+
+  .link {
+    color:white;
+  }
+
+  h4 {
+    padding: 50px 20px;
+  }
+
+
+}
       
 </style>
