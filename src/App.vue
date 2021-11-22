@@ -1,13 +1,32 @@
 <template>
   <router-view />
 </template>
+
+
 <script>
-
-
+import {firebaseAuth} from 'src/boot/firebase';
+import { onAuthStateChanged } from "firebase/auth";
+import { mapMutations } from 'vuex';
 export default {
-  name: 'App'
+  name: 'App',
+  methods :{ 
+    ...mapMutations('users', ['userLoggedIn'])
+  },
+  created() {
+    onAuthStateChanged(firebaseAuth, (user) => {
+  if (user) {
+    const uid = user.uid;
+    this.userLoggedIn(true)
+    // ...
+  } else {
+    this.userLoggedIn(false)
+  }
+});
+  }
 }
 </script>
+
+
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 * {

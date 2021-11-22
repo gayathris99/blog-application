@@ -1,12 +1,12 @@
 <template>
     <div class="form-container">
        
-        <q-form  @submit.prevent="loginUser" class="input">
+        <q-form  ref="loginForm" @submit.prevent="onLogin" class="input">
              <h4>Login to BusyMonk</h4>
             <q-input
                  
                 outlined 
-                v-model="email" 
+                v-model="userDetails.email" 
                 label="Email*" 
                 type="email"
                 :rules="[
@@ -17,7 +17,7 @@
             <q-input 
 
                 outlined  
-                v-model="password" 
+                v-model="userDetails.password" 
                 label="Password*" 
                 type="password"
                 :rules="[
@@ -35,17 +35,26 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
     name: "LoginUser",
     data() {
         return {
-            email: '',
-            password: ''
+            userDetails :{
+                email: '',
+                password: ''
+            }
         }
     },
     methods: {
-        loginUser() {
-
+        ...mapActions('users',['loginUser']),
+        onLogin() {
+            this.loginUser(this.userDetails)
+            this.userDetails = {
+                email: '',
+                password: ''
+            }
+            this.$refs.loginForm.reset()
         }
     }
 
@@ -81,11 +90,13 @@ export default {
         h6 {
             font-weight: 300;
             padding: 30px;
+            text-align: center;
             font-size: 15px;
              
             .link {
                 text-decoration: underline;
                 font-weight: bold;
+                text-align: center;
                 text-transform: capitalize;
 
                  &:hover {

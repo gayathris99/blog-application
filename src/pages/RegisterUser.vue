@@ -1,13 +1,13 @@
 <template>
    <div class="form-container">
        
-        <q-form  @submit.prevent="registerUser" class="input">
+        <q-form ref="registerForm" @submit.prevent="onRegister" class="input">
              <h4>Be a part of the BusyMonk Family! <br> Register Now</h4>
 
             <q-input
                  
                 outlined 
-                v-model="firstName" 
+                v-model="userDetails.firstName" 
                 label="First Name*" 
                 type="text"
                 :rules="[
@@ -18,7 +18,7 @@
             <q-input
                  
                 outlined 
-                v-model="lastName" 
+                v-model="userDetails.lastName" 
                 label="Last Name*" 
                 type="text"
                 :rules="[
@@ -29,7 +29,7 @@
             <q-input
                  
                 outlined 
-                v-model="email" 
+                v-model="userDetails.email" 
                 label="Email*" 
                 type="email"
                 :rules="[
@@ -40,7 +40,7 @@
             <q-input 
 
                 outlined  
-                v-model="password" 
+                v-model="userDetails.password" 
                 label="Password*" 
                 type="password"
                 :rules="[
@@ -50,12 +50,12 @@
             <q-input 
 
                 outlined  
-                v-model="confirmPassword" 
+                v-model="userDetails.confirmPassword" 
                 label="Confirm Password*" 
                 type="password"
                 :rules="[
                     val => (val && val.length > 0) || 'Password is required',
-                    val => (password === confirmPassword) || 'Passwords do not match'
+                    val => (userDetails.password === userDetails.confirmPassword) || 'Passwords do not match'
                 ]"
             />
             <div class="btn">
@@ -69,21 +69,35 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
     name: "RegisterUser",
     data () {
         return {
+        userDetails: {
+
             firstName: '',
             lastName: '',
             email: '',
             password: '',
             confirmPassword: '',
         }
+        }
     },
 
     methods: {
-        registerUser() {
-
+        ...mapActions('users', ['registerUser']),
+        onRegister() {
+            this.registerUser(this.userDetails)
+            this.userDetails = {
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+            }
+            this.$refs.registerForm.reset()
+            
         }
     }
 }

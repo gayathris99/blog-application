@@ -9,7 +9,8 @@
                 <router-link class="link" to="/home" :style="$route.path.includes('home') ? 'color:#1eb8b8' : ''" >Home</router-link>
                 <router-link class="link" to="/blogs" :style="$route.path.includes('blogs') ? 'color:#1eb8b8' : ''">Blogs</router-link>
                 <router-link class="link" to="/">Create Post</router-link>
-                <router-link class="link" to="/login" :style="$route.path.includes('login') || $route.path.includes('register') ? 'color:#1eb8b8' : ''">Login/Register</router-link>
+                <router-link class="link" to="/login" v-if="!userLoggedIn" :style="$route.path.includes('login') || $route.path.includes('register') ? 'color:#1eb8b8' : ''">Login/Register</router-link>
+                 <router-link class="link" to="/home" @click="onLogout" v-if="userLoggedIn" >Logout</router-link>
              </ul>
              
            </div>
@@ -22,7 +23,8 @@
                 <router-link class="link" to="/home" :style="$route.path.includes('home') ? 'color:#1eb8b8' : ''" >Home</router-link>
                 <router-link class="link" to="/blogs" :style="$route.path.includes('blogs') ? 'color:#1eb8b8' : ''">Blogs</router-link>
                 <router-link class="link" to="/">Create Post</router-link>
-                <router-link class="link" to="/login" :style="$route.path.includes('login') || $route.path.includes('register') ? 'color:#1eb8b8' : ''">Login/Register</router-link>
+                <router-link class="link" to="/login" v-if="!userLoggedIn" :style="$route.path.includes('login') || $route.path.includes('register') ? 'color:#1eb8b8' : ''">Login/Register</router-link>
+                 <router-link class="link" to="/home" @click="onLogout" v-if="userLoggedIn" >Logout</router-link>
              </ul>
     </transition>
   </header>
@@ -33,7 +35,8 @@
      <ul>
       <router-link class="link" to="/home" :style="$route.path.includes('home') ? 'color:#1eb8b8' : ''" >Home</router-link>
       <router-link class="link" to="/blogs" :style="$route.path.includes('blogs') ? 'color:#1eb8b8' : ''">Blogs</router-link>
-      <router-link class="link" to="/login" :style="$route.path.includes('login') || $route.path.includes('register') ? 'color:#1eb8b8' : ''">Login/Register</router-link>
+      <router-link class="link" to="/login" v-if="!userLoggedIn" :style="$route.path.includes('login') || $route.path.includes('register') ? 'color:#1eb8b8' : ''">Login/Register</router-link>
+       <router-link class="link" to="/home" @click="onLogout" v-if="userLoggedIn" >Logout</router-link>
     </ul>
     </div>
 
@@ -41,6 +44,7 @@
 
 </template>
 <script>
+import { mapActions, mapGetters } from 'vuex';
 export default {
   data() {
     return {
@@ -52,8 +56,13 @@ export default {
   created() {
     window.addEventListener('resize', this.checkWindowWidth);
     this.checkWindowWidth()
+    
+  },
+  computed: {
+    ...mapGetters('users', ['userLoggedIn'])
   },
   methods: {
+    ...mapActions('users', ['logoutUser']),
     checkWindowWidth() {
       this.windowWidth = window.innerWidth;
       if (this.windowWidth <=750) {
@@ -67,6 +76,11 @@ export default {
 
     toggleMobileNav() {
       this.mobileNav = !this.mobileNav
+    },
+
+    onLogout() {
+      this.logoutUser()
+      
     }
   }
 }
