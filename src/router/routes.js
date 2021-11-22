@@ -4,7 +4,7 @@ const routes = [
     path: '/',
     component: () => import('src/layouts/MainLayout.vue'),
     children: [
-      { path: '/', component: () => import('src/pages/Index.vue'), meta: {
+      { path: '/home', component: () => import('src/pages/Index.vue'), meta: {
         title: 'BusyMonk'
       } },
       {
@@ -13,8 +13,17 @@ const routes = [
         meta: {
           title: 'BusyMonk | Blogs'
         }
-        
+
+      },
+      {
+        path: "/register",
+        component: () => import('src/pages/RegisterUser.vue')
+      },
+      {
+        path: "/login",
+        component: () => import('src/pages/LoginUser.vue')
       }
+
     ]
   },
 

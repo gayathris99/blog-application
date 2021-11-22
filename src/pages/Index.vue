@@ -19,7 +19,7 @@
           <br>
           REGISTER AT BUSYMONK FOR FREE
         </h4>
-        <router-link class="button" to="#">Register Here</router-link>
+        <router-link class="button" to="/register">Register Here</router-link>
       </div>
     </div>
   </q-layout>

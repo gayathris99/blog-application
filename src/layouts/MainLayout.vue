@@ -3,13 +3,13 @@
 <header>
   <nav class="container">
         <div class="branding">
-          <router-link class="header" to="/">BusyMonk</router-link>
+          <router-link class="header" to="/home">BusyMonk</router-link>
            <div class="nav-links">
              <ul v-if="!mobile">
-                <router-link class="link" to="/">Home</router-link>
+                <router-link class="link" to="/home" :style="$route.path.includes('home') ? 'color:#1eb8b8' : ''" >Home</router-link>
                 <router-link class="link" to="/blogs" :style="$route.path.includes('blogs') ? 'color:#1eb8b8' : ''">Blogs</router-link>
                 <router-link class="link" to="/">Create Post</router-link>
-                <router-link class="link" to="/">Login/Register</router-link>
+                <router-link class="link" to="/login" :style="$route.path.includes('login') || $route.path.includes('register') ? 'color:#1eb8b8' : ''">Login/Register</router-link>
              </ul>
              
            </div>
@@ -19,21 +19,21 @@
     
     <transition name="mobile-nav" @click="toggleMobileNav"> 
               <ul v-if="mobileNav" class="mobile-nav">
-                <router-link class="link" to="/">Home</router-link>
+                <router-link class="link" to="/home" :style="$route.path.includes('home') ? 'color:#1eb8b8' : ''" >Home</router-link>
                 <router-link class="link" to="/blogs" :style="$route.path.includes('blogs') ? 'color:#1eb8b8' : ''">Blogs</router-link>
                 <router-link class="link" to="/">Create Post</router-link>
-                <router-link class="link" to="/">Login/Register</router-link>
+                <router-link class="link" to="/login" :style="$route.path.includes('login') || $route.path.includes('register') ? 'color:#1eb8b8' : ''">Login/Register</router-link>
              </ul>
     </transition>
   </header>
   <router-view></router-view>
-  <footer>
+  <footer v-if="$route.path.includes('home')">
     <div class="footer-container">
        <h4>BusyMonk</h4>
      <ul>
-      <router-link class="link" to="/">Home</router-link>
+      <router-link class="link" to="/home" :style="$route.path.includes('home') ? 'color:#1eb8b8' : ''" >Home</router-link>
       <router-link class="link" to="/blogs" :style="$route.path.includes('blogs') ? 'color:#1eb8b8' : ''">Blogs</router-link>
-      <router-link class="link" to="/">Login/Register</router-link>
+      <router-link class="link" to="/login" :style="$route.path.includes('login') || $route.path.includes('register') ? 'color:#1eb8b8' : ''">Login/Register</router-link>
     </ul>
     </div>
 

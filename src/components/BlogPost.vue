@@ -9,7 +9,7 @@
                 <p>
                     {{ post.welcomeScreen ? post.blogPost : post.blogContent }}
                 </p>
-                <router-link class="link" to="#">{{ post.welcomeScreen ? "Login/Register" : "View The Post &#8599;"}}</router-link>
+                <router-link class="link" :to="post.welcomeScreen? '/login' : '#'">{{ post.welcomeScreen ? "Login/Register" : "View The Post &#8599;"}}</router-link>
             </div>
            
             </div>
